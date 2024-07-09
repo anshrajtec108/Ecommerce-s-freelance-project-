@@ -1,5 +1,5 @@
 import { DataTypes }from 'sequelize';
-import sequelize  from '../../config/mysqlConnet.js';
+import sequelize from '../../config/mysqlConnet.js';
 
 const Role = sequelize.define('Role', {
     id: {

@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysqlConnet.js';
-import User from './User.js';
-import Role from './Role.js';
+import Role from './role.models.js';
 
 const User = sequelize.define('User', {
     id: {
@@ -67,7 +66,5 @@ const User = sequelize.define('User', {
 
     
 });
-Role.hasMany(User, { foreignKey: 'role_id' });
-User.belongsTo(Role, { foreignKey: 'role_id' });
 
 export default User;

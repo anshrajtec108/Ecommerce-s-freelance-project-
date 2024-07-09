@@ -1,21 +1,12 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysqlConnet.js';
-import Order from './order.js';
 import Product from '../product/product.js';
 
-const OrderItem = sequelize.define('OrderItem', {
+const Discount = sequelize.define('Discount', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-    },
-    order_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: Order,
-            key: 'id',
-        },
-        onDelete: 'CASCADE',
     },
     product_id: {
         type: DataTypes.INTEGER,
@@ -25,18 +16,22 @@ const OrderItem = sequelize.define('OrderItem', {
         },
         onDelete: 'CASCADE',
     },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    price: {
+    discount_percentage: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    valid_from: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    valid_to: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
 }, {
-    tableName: 'Order_Items',
+    tableName: 'Discounts',
     timestamps: false,
     underscored: true,
 });
 
-export default OrderItem;
+export default Discount;

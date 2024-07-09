@@ -1,9 +1,23 @@
 import dotenv from 'dotenv';
-import sequelize from './config/mysqlConnect.js';
+import sequelize from './config/mysqlConnet.js';
 import app from './app.js';
-import { Product, ProductImage, ProductVideo, ProductURL, BestProduct } from './models/product/JoinsProduct.js';
-import User from './models/user/user.models.js';
-import Role from './models/user/role.models.js';
+import {
+    User,
+    Product,
+    ProductImage,
+    ProductVideo,
+    BestProduct,
+    Category,
+    Order,
+    OrderItem,
+    Payment,
+    ShippingAddress,
+    Review,
+    Coupon,
+    Inventory,
+    Discount,
+    Cart,
+    CartItem, } from './models/model_index.js';
 
 dotenv.config();
 

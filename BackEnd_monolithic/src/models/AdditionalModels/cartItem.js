@@ -1,18 +1,18 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/mysqlConnet.js';
-import Order from './order.js';
+import Cart from './cart.js';
 import Product from '../product/product.js';
 
-const OrderItem = sequelize.define('OrderItem', {
+const CartItem = sequelize.define('CartItem', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    order_id: {
+    cart_id: {
         type: DataTypes.INTEGER,
         references: {
-            model: Order,
+            model: Cart,
             key: 'id',
         },
         onDelete: 'CASCADE',
@@ -29,14 +29,10 @@ const OrderItem = sequelize.define('OrderItem', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    price: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
 }, {
-    tableName: 'Order_Items',
+    tableName: 'Cart_Items',
     timestamps: false,
     underscored: true,
 });
 
-export default OrderItem;
+export default CartItem;

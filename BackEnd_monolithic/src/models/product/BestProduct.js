@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/mysqlConnect.js';
+import sequelize from '../../config/mysqlConnet.js';
 import Product from './product.js';
 
 const BestProduct = sequelize.define('BestProduct', {

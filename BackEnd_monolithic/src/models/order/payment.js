@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../sequelize.js';
+import sequelize from '../../config/mysqlConnet.js';
 import Order from './order.js';
 
 const Payment = sequelize.define('Payment', {
