@@ -1,14 +1,24 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import bodyParser from 'body-parser';
+import userRouter from "./routers/user.router.js";
+import helmet from 'helmet';
 
 const app = express();
 
-// Apply CORS middleware
+app.use(helmet());
 app.use(cors({
     origin: '*',
-    credentials: true // If you're using cookies or other credentials
+    credentials: true
 }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.use('/api/v1/users', userRouter)
+
+
 
 
 

@@ -18,16 +18,20 @@ const User = sequelize.define('User', {
         allowNull: false,
         unique: true
     },
-    password_hash: {
+    password: {
         type: DataTypes.STRING(255),
         allowNull: false
     },
     first_name: {
         type: DataTypes.STRING(50),
-        allowNull: true
+        allowNull: false
     },
     last_name: {
         type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    profile_pic:{
+        type: DataTypes.STRING(255),
         allowNull: true
     },
     phone_number: {
@@ -61,10 +65,6 @@ const User = sequelize.define('User', {
 }, {
     timestamps: false,
     tableName: 'Users'
-
-
-
-    
 });
 
 export default User;
