@@ -11,21 +11,21 @@ const storage = multer.diskStorage({
 
 // Check file type
 const checkFileType = (file, cb) => {
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|png|gif|mp4|mov/; // Add video file types as needed
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
 
     if (mimetype && extname) {
         return cb(null, true);
     } else {
-        cb('Error: Images Only!');
+        cb('Error: Images and Videos Only!');
     }
 };
 
 // Initialize upload
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+    limits: { fileSize: 20 * 1024 * 1024 }, // 10MB
     fileFilter: (req, file, cb) => {
         checkFileType(file, cb);
     }

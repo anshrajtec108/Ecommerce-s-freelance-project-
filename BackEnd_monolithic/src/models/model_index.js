@@ -15,10 +15,12 @@ import Inventory from './AdditionalModels/inventory.js';
 import Discount from './AdditionalModels/discount.js';
 import Cart from './AdditionalModels/cart.js';
 import CartItem from './AdditionalModels/cartItem.js';
+import Seller from './User/Seller.js';
 
 // Define associations
 Role.hasMany(User, { foreignKey: 'role_id' });
 User.belongsTo(Role, { foreignKey: 'role_id' });
+Seller.belongsTo(Role, { foreignKey: 'role_id' });
 
 Product.hasMany(ProductImage, { foreignKey: 'product_id' });
 ProductImage.belongsTo(Product, { foreignKey: 'product_id' });

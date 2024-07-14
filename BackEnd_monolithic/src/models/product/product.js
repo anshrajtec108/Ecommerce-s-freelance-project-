@@ -42,7 +42,7 @@ const Product = sequelize.define('Product', {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
-            model: 'Users',
+            model: 'Seller',
             key: 'id'
         },
         onDelete: 'SET NULL'
