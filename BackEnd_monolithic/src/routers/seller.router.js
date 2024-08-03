@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.post('/register', sellerValidator, upload.single('profile_pic') ,registerSeller);
 router.post('/login', loginValidator, loginSeller);
-router.post('/logout', authMiddleware, authorizeRoles(['seller']), logoutSeller);
+router.post('/logout', authorizeRoles(['seller']), logoutSeller);
 
 export default router;

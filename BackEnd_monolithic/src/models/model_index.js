@@ -1,5 +1,5 @@
 import User from './user/user.models.js';
-import Role from './user/role.models.js';
+import Role from './User/role.models.js';
 import Product from './product/product.js';
 import ProductImage from './product/productImg.js';
 import ProductVideo from './product/productVideo.js';
@@ -19,20 +19,20 @@ import Seller from './User/Seller.js';
 
 // Define associations
 Role.hasMany(User, { foreignKey: 'role_id' });
-User.belongsTo(Role, { foreignKey: 'role_id' });
+User.belongsTo(Role, { foreignKey: 'role_id', as: 'role' }); // Add alias here
 Seller.belongsTo(Role, { foreignKey: 'role_id' });
 
-Product.hasMany(ProductImage, { foreignKey: 'product_id' });
-ProductImage.belongsTo(Product, { foreignKey: 'product_id' });
 
-Product.hasMany(ProductVideo, { foreignKey: 'product_id' });
-ProductVideo.belongsTo(Product, { foreignKey: 'product_id' });
+// In your models definition file (e.g., models/product.js)
 
-Product.hasOne(BestProduct, { foreignKey: 'product_id' });
-BestProduct.belongsTo(Product, { foreignKey: 'product_id' });
+Product.hasMany(ProductImage, { as: 'images', foreignKey: 'product_id' });
+Product.hasMany(ProductVideo, { as: 'videos', foreignKey: 'product_id' });
+Product.belongsTo(Category, { as: 'category', foreignKey: 'category_id' });
 
-Category.hasMany(Product, { foreignKey: 'category_id' });
-Product.belongsTo(Category, { foreignKey: 'category_id' });
+ProductImage.belongsTo(Product, { as: 'product', foreignKey: 'product_id' });
+ProductVideo.belongsTo(Product, { as: 'product', foreignKey: 'product_id' });
+Category.hasMany(Product, { as: 'products', foreignKey: 'category_id' });
+
 
 User.hasMany(Order, { foreignKey: 'user_id' });
 Order.belongsTo(User, { foreignKey: 'user_id' });
@@ -73,21 +73,24 @@ CartItem.belongsTo(Cart, { foreignKey: 'cart_id' });
 Product.hasMany(CartItem, { foreignKey: 'product_id' });
 CartItem.belongsTo(Product, { foreignKey: 'product_id' });
 
+// Export models and sequelize instance
 export {
-    User,
-    Product,
-    ProductImage,
-    ProductVideo,
-    BestProduct,
-    Category,
-    Order,
-    OrderItem,
-    Payment,
-    ShippingAddress,
-    Review,
-    Coupon,
-    Inventory,
-    Discount,
-    Cart,
-    CartItem,
+  User,
+  Role,
+  Product,
+  ProductImage,
+  ProductVideo,
+  BestProduct,
+  Category,
+  Order,
+  OrderItem,
+  Payment,
+  ShippingAddress,
+  Review,
+  Coupon,
+  Inventory,
+  Discount,
+  Cart,
+  CartItem,
+  Seller
 };

@@ -1,11 +1,11 @@
-import { User } from "../models/model_index"
-import { asyncHandler } from "../utils/asyncHandler"
+import { User } from "../models/model_index.js";
+import { asyncHandler } from "../utils/asyncHandler.js"
 
 
 
 
 export const isAuthenticated = asyncHandler( async (req, res, next) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const token = req.header('Authorization')?.replace('Bearer ', '') || req.cookies['auth_token'];
 
     if (!token) {
         return res.status(401).json({ error: 'Unauthorized: No token provided' });

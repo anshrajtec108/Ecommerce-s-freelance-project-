@@ -1,53 +1,54 @@
 import { Product, ProductImage, ProductVideo, Category } from '../models/model_index.js';
 import { asyncHandler } from '../utils/asyncHandler.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
-import { ApiResponse, ApiError } from '../utils/ApiResponse.js';
+import { ApiResponse } from '../utils/ApiResponse.js';
 import { validationResult } from 'express-validator';
+import { ApiError } from '../utils/ApiError.js';
 
 // Controller to create a new product
- const createProduct = asyncHandler(async (req, res, next) => {
-    const { name, description, price, category_id } = req.body;
+const createProduct = asyncHandler(async (req, res, next) => {
+    const { name, description, price, category_id, owner_id, stock_quantity } = req.body;
+    console.log("name, description, price, category_id", name, description, price, category_id, owner_id, stock_quantity);
 
-    try {
-        const newProduct = await Product.create({
-            name,
-            description,
-            price,
-            category_id,
-            created_at: new Date(),
-            updated_at: new Date()
-        });
+    const newProduct = await Product.create({
+        name: name,
+        description,
+        price,
+        category_id,
+        stock_quantity,
+        owner_id,
+        created_at: new Date(),
+        updated_at: new Date()
+    });
+    console.log(req.files.images, "req.files.images");
+    // Handle image uploads
+    if (req.files.images) {
+        const imageUploads = req.files.images.map(file =>
+            uploadOnCloudinary(file.path).then(uploadResult => ({
+                product_id: newProduct.id,
+                image_url: uploadResult.secure_url
+            }))
+        );
 
-        // Handle image uploads
-        if (req.files.images) {
-            const imageUploads = req.files.images.map(file =>
-                uploadOnCloudinary(file.path).then(uploadResult => ({
-                    product_id: newProduct.id,
-                    image_url: uploadResult.secure_url
-                }))
-            );
-
-            const images = await Promise.all(imageUploads);
-            await ProductImage.bulkCreate(images);
-        }
-
-        // Handle video uploads
-        if (req.files.videos) {
-            const videoUploads = req.files.videos.map(file =>
-                uploadOnCloudinary(file.path).then(uploadResult => ({
-                    product_id: newProduct.id,
-                    video_url: uploadResult.secure_url
-                }))
-            );
-
-            const videos = await Promise.all(videoUploads);
-            await ProductVideo.bulkCreate(videos);
-        }
-
-        res.status(201).json(new ApiResponse(201, newProduct, 'Product created successfully with images and videos'));
-    } catch (error) {
-        next(new ApiError(500, 'Server error', [], error.stack));
+        const images = await Promise.all(imageUploads);
+        await ProductImage.bulkCreate(images);
     }
+
+    // Handle video uploads
+    if (req.files.videos) {
+        const videoUploads = req.files.videos.map(file =>
+            uploadOnCloudinary(file.path).then(uploadResult => ({
+                product_id: newProduct.id,
+                video_url: uploadResult.secure_url
+            }))
+        );
+
+        const videos = await Promise.all(videoUploads);
+        await ProductVideo.bulkCreate(videos);
+    }
+
+    return res.status(201).json(new ApiResponse(201, newProduct, 'Product created successfully with images and videos'));
+
 });
 
 

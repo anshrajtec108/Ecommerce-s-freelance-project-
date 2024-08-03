@@ -15,6 +15,7 @@ const Order = sequelize.define('Order', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     total_price: {
         type: DataTypes.FLOAT,
@@ -23,20 +24,13 @@ const Order = sequelize.define('Order', {
     status: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
-    created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
-    },
-    updated_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
+        validate: {
+            isIn: [['pending', 'completed', 'cancelled']],
+        },
     },
 }, {
     tableName: 'Orders',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
 });
 

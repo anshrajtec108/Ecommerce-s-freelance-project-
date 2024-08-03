@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/mysqlConnect.js';
-import Role from './role.js';
+import sequelize from '../../config/mysqlConnet.js';
+import Role from './role.models.js';
 
 const Seller = sequelize.define('Seller', {
     id: {
@@ -51,7 +51,7 @@ const Seller = sequelize.define('Seller', {
     }
 }, {
     timestamps: false,
-    tableName: 'Sellers'
+    tableName: 'Seller'
 });
 
 

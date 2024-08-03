@@ -1,0 +1,59 @@
+{
+  "info": {
+    "_postman_id": "b7d92cf8-58f3-4d44-8100-7e8a1e931fbd",
+    "name": "Stripe Integration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Order",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"user_id\": 1,\n  \"items\": [\n    {\n      \"product_id\": 1,\n      \"quantity\": 2,\n      \"price\": 5000\n    },\n    {\n      \"product_id\": 2,\n      \"quantity\": 1,\n      \"price\": 3000\n    }\n  ],\n  \"payment\": {\n    \"method\": \"card\"\n  },\n  \"shipping_address\": {\n    \"address\": \"123 Main St\",\n    \"city\": \"San Francisco\",\n    \"state\": \"CA\",\n    \"postal_code\": \"94111\",\n    \"country\": \"US\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/v1/create-order",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "create-order"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Payment Status",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"payment_intent_id\": \"{{payment_intent_id}}\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/v1/payment-status",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "payment-status"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

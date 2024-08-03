@@ -16,6 +16,7 @@ const ShippingAddress = sequelize.define('ShippingAddress', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     order_id: {
         type: DataTypes.INTEGER,
@@ -24,34 +25,39 @@ const ShippingAddress = sequelize.define('ShippingAddress', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     address_line1: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     address_line2: {
         type: DataTypes.STRING,
-        allowNull: true,
     },
     city: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     state: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     zip_code: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     country: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
 }, {
     tableName: 'Shipping_Addresses',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
 });
 

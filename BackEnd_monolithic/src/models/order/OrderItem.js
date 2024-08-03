@@ -16,6 +16,7 @@ const OrderItem = sequelize.define('OrderItem', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     product_id: {
         type: DataTypes.INTEGER,
@@ -24,10 +25,14 @@ const OrderItem = sequelize.define('OrderItem', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        validate: {
+            min: 1,
+        },
     },
     price: {
         type: DataTypes.FLOAT,
@@ -35,7 +40,7 @@ const OrderItem = sequelize.define('OrderItem', {
     },
 }, {
     tableName: 'Order_Items',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
 });
 

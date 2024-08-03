@@ -15,27 +15,36 @@ const Payment = sequelize.define('Payment', {
             key: 'id',
         },
         onDelete: 'CASCADE',
+        allowNull: false,
     },
     amount: {
         type: DataTypes.FLOAT,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     payment_method: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
     payment_status: {
         type: DataTypes.STRING,
-        allowNull: false,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
-    created_at: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW,
+    stripe_receipt_url: {
+        type: DataTypes.STRING,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
+    },
+    stripe_payment_intent_id: {
+        type: DataTypes.STRING,
+        // allowNull: false, // for the tesing the is true 
+        allowNull: true,
     },
 }, {
     tableName: 'Payments',
-    timestamps: false,
+    timestamps: true,
     underscored: true,
 });
 
