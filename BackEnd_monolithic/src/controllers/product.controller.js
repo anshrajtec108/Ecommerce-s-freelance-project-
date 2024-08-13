@@ -8,7 +8,7 @@ import { ApiError } from '../utils/ApiError.js';
 // Controller to create a new product
 const createProduct = asyncHandler(async (req, res, next) => {
     const { name, description, price, category_id, owner_id, stock_quantity } = req.body;
-    console.log("name, description, price, category_id", name, description, price, category_id, owner_id, stock_quantity);
+    // console.log("name, description, price, category_id", name, description, price, category_id, owner_id, stock_quantity);
 
     const newProduct = await Product.create({
         name: name,

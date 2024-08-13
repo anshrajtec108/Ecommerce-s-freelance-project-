@@ -33,7 +33,7 @@ import { uploadOnCloudinary } from '../utils/cloudinary.js';
 
         res.status(201).json(new ApiResponse(201, newSeller, 'Seller registered successfully'));
     } catch (error) {
-        next(new ApiError(500, 'Server error', [], error.stack));
+        next(new ApiError(500, 'Server error', [], error.stack));n
     }
 };
 

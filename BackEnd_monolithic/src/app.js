@@ -11,6 +11,7 @@ import sellerRouter from './routers/seller.router.js'
 import testingRouter from './routers/testing.router.js'
 import paymentRouter from './routers/payment.router.js'
 import orderRouter from './routers/order.router.js'
+import reviewRouter from './routers/review.router.js'
 
 //import function  
 import errorHandler from "./middlewares/errorHandler.middleware.js";
@@ -33,6 +34,7 @@ app.use('/api/v1/seller', sellerRouter)
 app.use('/api/v1/testapi', testingRouter)
 app.use('/api/v1/payment',paymentRouter)
 app.use('/api/v1/order', orderRouter)
+app.use('/api/v1/review', reviewRouter)
 
 app.use(errorHandler);
 
