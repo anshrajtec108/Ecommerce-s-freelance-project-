@@ -5,10 +5,10 @@ import { ApiError } from '../utils/ApiError.js';
 import { validationResult } from 'express-validator';
 
 // Middleware for validating review input
-const validateReviewInput = [
-    check('rating').isInt({ min: 1, max: 5 }).withMessage('Rating must be between 1 and 5'),
-    check('comment').isLength({ min: 5, max: 500 }).withMessage('Comment must be between 5 and 500 characters'),
-];
+// const validateReviewInput = [
+//     check('rating').isInt({ min: 1, max: 5 }).withMessage('Rating must be between 1 and 5'),
+//     check('comment').isLength({ min: 5, max: 500 }).withMessage('Comment must be between 5 and 500 characters'),
+// ];
 
 // Create a new review
 export const createReview = asyncHandler(async (req, res, next) => {

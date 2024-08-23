@@ -1,7 +1,7 @@
 import express from 'express';
 import { createOrder } from '../controllers/order.controller.js';
 import { updatePaymentStatus } from '../controllers/payment.controller.js';
-import { isAuthenticated, isAuthorized } from '../middlewares/auth.js';
+// import { isAuthenticated, isAuthorized } from '../middlewares/auth.js';
 
 const router = express.Router();
 
