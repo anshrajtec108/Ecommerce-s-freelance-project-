@@ -18,6 +18,7 @@ import {
     Discount,
     Cart,
     CartItem, } from './models/model_index.js';
+import connectDB from './config/mongoDBConnet.js';
 
 dotenv.config();
 
@@ -28,7 +29,8 @@ const startServer = async () => {
         // await sequelize.sync({ force: true });
         await sequelize.sync();
         //  await sequelize.sync({ alter: true });
-        console.log('Database & tables created!');
+        console.log('mysql Database & tables created!');
+        await connectDB()
 
         const server = app.listen(port, () => {
             console.log(`Express server is running at PORT ${port}`);

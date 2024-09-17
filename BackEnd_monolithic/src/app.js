@@ -13,8 +13,8 @@ import paymentRouter from './routers/payment.router.js'
 import orderRouter from './routers/order.router.js'
 import reviewRouter from './routers/review.router.js'
 import homeRouter from './routers/home.router.js'
-
-
+import cardRouter from './routers/cart.router.js'
+import AdminRouter from './routers/admin.router.js';
 //import function  
 import errorHandler from "./middlewares/errorHandler.middleware.js";
 
@@ -34,10 +34,12 @@ app.use('/api/v1/users', userRouter)
 app.use('/api/v1/product', prodectRouter)
 app.use('/api/v1/seller', sellerRouter)
 app.use('/api/v1/testapi', testingRouter)
-app.use('/api/v1/payment',paymentRouter)
+app.use('/api/v1/payment', paymentRouter)
 app.use('/api/v1/order', orderRouter)
 app.use('/api/v1/review', reviewRouter)
 app.use('/api/v1/home', homeRouter)
+app.use('/api/v1/cart', cardRouter)
+app.use('/api/v1/admin', AdminRouter)
 
 app.use(errorHandler);
 

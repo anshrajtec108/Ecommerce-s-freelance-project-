@@ -20,7 +20,7 @@ import Seller from './User/Seller.js';
 // Define associations
 Role.hasMany(User, { foreignKey: 'role_id' });
 User.belongsTo(Role, { foreignKey: 'role_id', as: 'role' }); // Add alias here
-Seller.belongsTo(Role, { foreignKey: 'role_id' });
+Seller.belongsTo(Role, { foreignKey: 'role_id', as: 'role' });
 
 
 // In your models definition file (e.g., models/product.js)

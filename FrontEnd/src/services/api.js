@@ -4,10 +4,10 @@ import Cookies from 'js-cookie';
 import { handleErrors } from './errorHandler';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+// import.meta.env.VITE_STRIPE_PUBLIC_KEY
 const getAuthToken = () => {
     // Securely get the token with added checks
-    const token = Cookies.get('accessToken');
+    const token = localStorage.getItem('accessToken');
     if (!token) {
         throw new Error('No access token found');
     }

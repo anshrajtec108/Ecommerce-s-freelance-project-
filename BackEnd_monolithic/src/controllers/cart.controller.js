@@ -29,7 +29,7 @@ export const addItemToCart = asyncHandler(async (req, res, next) => {
         await CartItem.create({ cart_id: cart.id, product_id, quantity });
     }
 
-    res.status(201).json(new ApiResponse(201, cart, 'Item added to cart successfully.'));
+    res.status(201).json(new ApiResponse(201, cart, 'I tem added to cart successfully.'));
 });
 
 // Get all items in the cart

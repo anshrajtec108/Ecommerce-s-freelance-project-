@@ -1,58 +1,30 @@
-import React, { useState } from 'react';
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import React, { useEffect, useState } from 'react';
+import { Checkout } from './PaymentForm';
+import axios from 'axios';
 
-const CheckoutForm = ({ clientSecret, orderId }) => {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [error, setError] = useState(null);
-    const [paymentProcessing, setPaymentProcessing] = useState(false);
-    const [paymentSucceeded, setPaymentSucceeded] = useState(false);
+const PaymentPage = ({ orderId }) => {
+    const [clientSecret, setClientSecret] = useState(null);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setPaymentProcessing(true);
+    useEffect(() => {
+        // Fetch the payment intent client secret from your backend
+        const fetchPaymentIntent = async () => {
+            try {
+                const response = await axios.post('http://localhost:8000/api/v1/payment/update-payment-status', { order_id: orderId });
+                setClientSecret(response.data.client_secret);
+            } catch (error) {
+                console.error('Error creating payment intent:', error);
+            }
+        };
 
-        if (!stripe || !elements) {
-            return;
-        }
-
-        const cardElement = elements.getElement(CardElement);
-        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    name: 'Customer Name',
-                },
-            },
-        });
-
-        if (error) {
-            setError(error.message);
-            setPaymentProcessing(false);
-        } else {
-            setPaymentSucceeded(true);
-            setPaymentProcessing(false);
-
-            await fetch('/api/payment-status', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ payment_intent_id: paymentIntent.id, order_id: orderId }),
-            });
-        }
-    };
+        fetchPaymentIntent();
+    }, [orderId]);
 
     return (
-        <form onSubmit={handleSubmit}>
-            <CardElement />
-            <button type="submit" disabled={!stripe || paymentProcessing}>
-                {paymentProcessing ? 'Processing...' : 'Pay'}
-            </button>
-            {error && <div>{error}</div>}
-            {paymentSucceeded && <div>Payment succeeded!</div>}
-        </form>
+        <div>
+            <h1>Complete Your Payment</h1>
+            {clientSecret && <Checkout clientSecret={clientSecret} />}
+        </div>
     );
 };
 
-export default CheckoutForm;
+export default PaymentPage;

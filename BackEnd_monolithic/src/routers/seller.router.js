@@ -6,8 +6,10 @@ import upload from '../middlewares/multer.middleware.js';
 
 const router = express.Router();
 
-// router.post('/register', sellerValidator, upload.single('profile_pic') ,registerSeller);
-// router.post('/login', loginValidator, loginSeller);
-// router.post('/logout', authorizeRoles(['seller']), logoutSeller);
+router.post('/register', upload.single('profile_pic') ,registerSeller);
+router.post('/login', loginSeller);
+router.post('/logout',
+    //  authorizeRoles(['seller']),
+    logoutSeller);
 
 export default router;

@@ -1,0 +1,10 @@
+use `ecommerce`;
+select * from `users`;
+select * from `seller`;
+select * from `products`;
+select * from `orders`;
+select * from `order_items`;
+select * from `carts`;
+select * from `cart_items`;
+select * from `payments`;
+select * from `categories` ;
